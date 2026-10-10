@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 
@@ -8,11 +8,36 @@ const nunito = Nunito({
   variable: "--font-nunito",
 });
 
+const SITE_URL = "https://adventurous-eklavya.vercel.app";
+const TITLE = "Adventurous Eklavya 🌍 Big Adventures of a Little Explorer";
+const DESCRIPTION =
+  "Come play in Eklavya's adventure world! Watch his karate moves, fly a plane around the page, follow his trips to 7 countries and count down to his birthday.";
+
+// Share images (opengraph-image.png / twitter-image.png) and icons live in src/app
 export const metadata: Metadata = {
-  title: "Adventurous Eklavya | Big Adventures of a Curious Explorer",
-  description:
-    "Welcome to Eklavya's adventure world! A 7-year-old explorer who loves traveling, cricket, skating, dancing, singing, and acting.",
-  keywords: ["Eklavya", "adventure", "kids", "explorer", "travel"],
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  applicationName: "Adventurous Eklavya",
+  keywords: ["Eklavya", "adventure", "kids", "explorer", "travel", "karate", "cricket"],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Adventurous Eklavya",
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0f172a",
 };
 
 export default function RootLayout({
