@@ -6,7 +6,7 @@ import SectionWrapper, { SectionTitle } from './SectionWrapper';
 const funFacts = [
   {
     emoji: '🌏',
-    fact: 'I have already visited 7 countries before turning 8!',
+    fact: 'I have already visited 8 countries before turning 8!',
     color: 'bg-blue-50',
     border: 'border-blue-200',
   },

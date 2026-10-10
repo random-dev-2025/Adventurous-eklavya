@@ -11,7 +11,7 @@ const nunito = Nunito({
 const SITE_URL = "https://adventurous-eklavya.vercel.app";
 const TITLE = "Adventurous Eklavya 🌍 Big Adventures of a Little Explorer";
 const DESCRIPTION =
-  "Come play in Eklavya's adventure world! Watch his karate moves, fly a plane around the page, follow his trips to 7 countries and count down to his birthday.";
+  "Come play in Eklavya's adventure world! Watch his karate moves, fly a plane around the page, follow his trips to 8 countries and count down to his birthday.";
 
 // Share images (opengraph-image.png / twitter-image.png) and icons live in src/app
 export const metadata: Metadata = {

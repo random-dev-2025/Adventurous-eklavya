@@ -103,9 +103,21 @@ const COUNTRIES: CountryData[] = [
     icon: '\u{1F303}',
     cities: ['Hong Kong'],
   },
+  {
+    name: 'Poland',
+    code: 'PL',
+    flag: '\u{1F1F5}\u{1F1F1}',
+    stamp: 'WAW',
+    fact: 'Old towns & yummy pierogi!',
+    color: '#84CC16',
+    gradientFrom: 'from-lime-400',
+    gradientTo: 'to-green-500',
+    icon: '\u{1F95F}',
+    cities: ['Warsaw'],
+  },
 ];
 
-const TRAVEL_SEQUENCE = ['TH', 'MY', 'SG', 'AT', 'DE', 'CZ', 'HK'];
+const TRAVEL_SEQUENCE = ['TH', 'MY', 'SG', 'AT', 'DE', 'CZ', 'HK', 'PL'];
 
 // Passport-style travel card component
 function TravelCard({
