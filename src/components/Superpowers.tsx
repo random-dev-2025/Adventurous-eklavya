@@ -20,6 +20,20 @@ const superpowers = [
     desc: 'Hitting sixes all day!',
   },
   {
+    title: 'Super Swimmer',
+    emoji: '🏊',
+    color: 'from-cyan-400 to-sky-500',
+    glow: 'shadow-cyan-300/50',
+    desc: 'Swims like a fish!',
+  },
+  {
+    title: 'Karate Green Belt',
+    emoji: '🥋',
+    color: 'from-emerald-400 to-green-500',
+    glow: 'shadow-emerald-300/50',
+    desc: 'Trophy winner, black belt next!',
+  },
+  {
     title: 'Young Actor',
     emoji: '🎭',
     color: 'from-indigo-400 to-blue-400',

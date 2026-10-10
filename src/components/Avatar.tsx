@@ -16,13 +16,14 @@ type AvatarPose =
   | 'karate-kick'
   | 'karate-chop'
   | 'hello'
-  | 'sleeping';
+  | 'sleeping'
+  | 'swimming';
 
 export type { AvatarPose };
 
 // Karate belt color - change this when Eklavya earns a new belt!
-const BELT_COLOR = '#F97316';
-const BELT_DARK = '#C2410C';
+const BELT_COLOR = '#16A34A';
+const BELT_DARK = '#15803D';
 
 interface AvatarProps {
   pose?: AvatarPose;
@@ -608,6 +609,28 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
             ))}
           </g>
         );
+      case 'swimming':
+        return (
+          <g>
+            {/* Bare torso */}
+            <path d="M85 130 Q80 130 75 140 L72 175 Q72 180 80 180 L120 180 Q128 180 128 175 L125 140 Q120 130 115 130 Z" fill="url(#skinGrad)" />
+            <path d="M88 150 Q100 156 112 150" fill="none" stroke="#A0652F" strokeWidth="1" opacity="0.3" />
+            {/* Swim shorts */}
+            <path d="M76 172 L124 172 L126 196 L104 196 L100 186 L96 196 L74 196 Z" fill="#2563EB" />
+            <path d="M76 178 L124 178" stroke="#FACC15" strokeWidth="2.5" />
+            {/* Freestyle arms - windmilling around the shoulders */}
+            <g>
+              <animateTransform attributeName="transform" type="rotate" values="0 125 140;360 125 140" dur="1.2s" repeatCount="indefinite" />
+              <path d="M125 140 L125 104" fill="none" stroke="url(#skinGradArm)" strokeWidth="13" strokeLinecap="round" />
+              <circle cx="125" cy="100" r="7" fill="url(#skinGradArm)" />
+            </g>
+            <g>
+              <animateTransform attributeName="transform" type="rotate" values="180 75 140;540 75 140" dur="1.2s" repeatCount="indefinite" />
+              <path d="M75 140 L75 104" fill="none" stroke="url(#skinGradArm)" strokeWidth="13" strokeLinecap="round" />
+              <circle cx="75" cy="100" r="7" fill="url(#skinGradArm)" />
+            </g>
+          </g>
+        );
       case 'karate-ready':
         return (
           <g filter="url(#softShadow)">
@@ -723,7 +746,8 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
     const isKarateAttack = ['karate-punch', 'karate-kick', 'karate-chop'].includes(pose);
     const mouthOpen = pose === 'singing' || isKarateAttack;
     const isAsleep = pose === 'sleeping';
-    const isHappy = ['dancing', 'waving', 'skating', 'karate-ready'].includes(pose);
+    const isSwimming = pose === 'swimming';
+    const isHappy = ['dancing', 'waving', 'skating', 'karate-ready', 'swimming', 'hello'].includes(pose);
 
     return (
       <g filter="url(#headShadow)">
@@ -744,8 +768,8 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
         <path d="M133 86 Q136 90 135 96 Q134 100 131 98 Q132 94 132 90 Z" fill="url(#skinGrad)" />
         <path d="M132 91 Q133 89 134 91" fill="none" stroke="#B87A3D" strokeWidth="0.6" opacity="0.3" />
 
-        {/* === Cool swept-back anime hair === */}
-        <g>
+        {/* === Cool swept-back anime hair === (tucked under the cap when swimming) */}
+        <g display={isSwimming ? 'none' : undefined}>
           {/* Base hair volume */}
           <path d="M64 88 Q64 52 100 44 Q136 52 136 88 Q134 68 118 60 Q100 54 82 60 Q66 68 64 88" fill="url(#hairGrad)" />
 
@@ -787,7 +811,22 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
         <path d="M107 80 L113 77 L123 81" fill="none" stroke="#0F0F1E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
 
         {/* Sunglasses - always on, anime style (pushed up onto his hair while he naps) */}
-        {isAsleep ? (
+        {isSwimming ? (
+          <g>
+            {/* Swim cap */}
+            <path d="M65 86 Q62 44 100 40 Q138 44 135 86 Q100 74 65 86 Z" fill="#0EA5E9" />
+            <path d="M68 74 Q100 64 132 74" fill="none" stroke="#38BDF8" strokeWidth="3" />
+            <path d="M80 52 Q92 45 104 47" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="3" strokeLinecap="round" />
+            {/* Goggles */}
+            <line x1="66" y1="90" x2="77" y2="91" stroke="#0369A1" strokeWidth="3" />
+            <line x1="123" y1="91" x2="134" y2="90" stroke="#0369A1" strokeWidth="3" />
+            <path d="M93 91 Q100 88 107 91" fill="none" stroke="#0369A1" strokeWidth="3" />
+            <circle cx="85" cy="92" r="8.5" fill="#67E8F9" stroke="#0369A1" strokeWidth="2.5" />
+            <circle cx="115" cy="92" r="8.5" fill="#67E8F9" stroke="#0369A1" strokeWidth="2.5" />
+            <path d="M80 88 Q83 85 87 86" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <path d="M110 88 Q113 85 117 86" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" />
+          </g>
+        ) : isAsleep ? (
           <g>
             <g transform="translate(0 -20)">{renderSunglasses()}</g>
             {/* Closed sleepy eyes */}

@@ -15,6 +15,7 @@ import WorldMap from '@/components/WorldMap';
 import Countries from '@/components/Countries';
 import AdventurePoll from '@/components/AdventurePoll';
 import KarateShow from '@/components/KarateShow';
+import SplashZone from '@/components/SplashZone';
 import Gallery from '@/components/Gallery';
 import FunFacts from '@/components/FunFacts';
 import Footer from '@/components/Footer';
@@ -72,6 +73,7 @@ export default function Home() {
         <Countries />
         <AdventurePoll />
         <KarateShow />
+        <SplashZone />
         <Gallery />
         <FunFacts />
       </main>

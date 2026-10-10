@@ -11,6 +11,7 @@ const navItems = [
   { label: 'Superpowers', href: '#superpowers' },
   { label: 'Travels', href: '#travel-map' },
   { label: 'Karate', href: '#karate' },
+  { label: 'Swimming', href: '#swimming' },
   { label: 'Gallery', href: '#gallery' },
 ];
 

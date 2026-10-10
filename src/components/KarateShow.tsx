@@ -32,6 +32,66 @@ const BODY_MOTION: Record<string, { x: number; y: number; rotate: number }> = {
   'karate-chop': { x: 6, y: 6, rotate: 3 },
 };
 
+// Belt path at Eklavya's dojo - EARNED_BELT is the belt he has now
+const BELTS = [
+  { name: 'White', color: '#F8FAFC', knot: '#CBD5E1' },
+  { name: 'Yellow', color: '#FACC15', knot: '#CA8A04' },
+  { name: 'Orange', color: '#F97316', knot: '#C2410C' },
+  { name: 'Green', color: '#16A34A', knot: '#15803D' },
+  { name: 'Blue', color: '#2563EB', knot: '#1D4ED8' },
+  { name: 'Purple', color: '#9333EA', knot: '#7E22CE' },
+  { name: 'Brown', color: '#92400E', knot: '#78350F' },
+  { name: 'Black', color: '#111827', knot: '#000000' },
+];
+const EARNED_BELT = 'Green';
+const NEXT_BELT = BELTS[BELTS.findIndex(b => b.name === EARNED_BELT) + 1]?.name;
+
+function BeltIcon({ color, knot }: { color: string; knot: string }) {
+  return (
+    <svg viewBox="0 0 48 32" className="h-7 w-10 sm:h-8 sm:w-12" aria-hidden="true">
+      <rect x="2" y="8" width="44" height="8" rx="2" fill={color} stroke="#94A3B8" strokeWidth="0.8" />
+      <rect x="19" y="5" width="10" height="14" rx="3" fill={knot} />
+      <path d="M21 18 L16 30 L21 30 L24 19 Z" fill={color} stroke="#94A3B8" strokeWidth="0.8" />
+      <path d="M27 18 L32 30 L27 30 L24 19 Z" fill={color} stroke="#94A3B8" strokeWidth="0.8" />
+    </svg>
+  );
+}
+
+function Trophy() {
+  return (
+    <svg viewBox="0 0 120 140" className="h-36 w-32 drop-shadow-xl sm:h-40 sm:w-36" aria-hidden="true">
+      <defs>
+        <linearGradient id="trophyGold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FDE68A" />
+          <stop offset="45%" stopColor="#F59E0B" />
+          <stop offset="100%" stopColor="#B45309" />
+        </linearGradient>
+        <clipPath id="trophyCup">
+          <path d="M28 14 L92 14 L88 52 Q84 78 60 82 Q36 78 32 52 Z" />
+        </clipPath>
+      </defs>
+      {/* Handles */}
+      <path d="M30 22 Q8 22 12 42 Q16 58 34 58" fill="none" stroke="url(#trophyGold)" strokeWidth="7" strokeLinecap="round" />
+      <path d="M90 22 Q112 22 108 42 Q104 58 86 58" fill="none" stroke="url(#trophyGold)" strokeWidth="7" strokeLinecap="round" />
+      {/* Cup */}
+      <path d="M28 14 L92 14 L88 52 Q84 78 60 82 Q36 78 32 52 Z" fill="url(#trophyGold)" />
+      {/* Moving shine */}
+      <g clipPath="url(#trophyCup)">
+        <rect x="-30" y="0" width="16" height="100" fill="white" opacity="0.45" transform="skewX(-20)">
+          <animate attributeName="x" values="-30;130" dur="2.5s" repeatCount="indefinite" />
+        </rect>
+      </g>
+      {/* Star on cup */}
+      <path d="M60 30 L64 40 L75 40 L66 47 L69 58 L60 51 L51 58 L54 47 L45 40 L56 40 Z" fill="#FEF3C7" />
+      {/* Stem and base */}
+      <rect x="53" y="80" width="14" height="18" fill="url(#trophyGold)" />
+      <rect x="36" y="98" width="48" height="10" rx="3" fill="url(#trophyGold)" />
+      <rect x="28" y="108" width="64" height="20" rx="4" fill="#1E3A8A" />
+      <text x="60" y="122" textAnchor="middle" fontSize="10" fontWeight="900" fill="#FDE68A" fontFamily="sans-serif">KARATE</text>
+    </svg>
+  );
+}
+
 const SHOUT_COLORS = ['text-red-500', 'text-orange-500', 'text-blue-600', 'text-amber-500'];
 
 export default function KarateShow() {
@@ -197,6 +257,101 @@ export default function KarateShow() {
         <p className="mt-4 text-center text-sm font-semibold text-blue-400">
           Moves performed: <span className="tabular-nums text-blue-600">{movesDone}</span> 🥋
         </p>
+      </div>
+
+      {/* Trophy + belt journey */}
+      <div className="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-3">
+        <motion.div
+          className="flex flex-col items-center justify-center rounded-3xl bg-gradient-to-b from-amber-50 to-yellow-100 p-6 text-center shadow-lg shadow-amber-100"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ type: 'spring', stiffness: 200, damping: 14 }}
+        >
+          <motion.div animate={{ y: [-4, 4, -4], rotate: [-2, 2, -2] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}>
+            <Trophy />
+          </motion.div>
+          <h3 className="mt-2 text-lg font-black text-amber-800">Trophy Winner!</h3>
+          <p className="text-sm font-semibold text-amber-600">I won a karate trophy 🏆</p>
+        </motion.div>
+
+        <motion.div
+          className="flex flex-col justify-center rounded-3xl bg-white p-6 shadow-lg shadow-blue-100 md:col-span-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          <h3 className="text-lg font-black text-blue-900">My Belt Journey</h3>
+          <p className="text-sm font-semibold text-blue-400">
+            {EARNED_BELT} belt earned! Training hard to get my black belt soon 💪
+          </p>
+
+          <div className="relative mt-8">
+            {/* Track from the first belt's center to the last belt's center */}
+            <div className="absolute left-5 right-5 top-4 h-1.5 rounded-full bg-blue-100 sm:left-6 sm:right-6">
+              <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-slate-300 via-orange-400 to-green-500"
+                initial={{ width: 0 }}
+                whileInView={{ width: `${(BELTS.findIndex(b => b.name === EARNED_BELT) / (BELTS.length - 1)) * 100}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, delay: 0.3, ease: 'easeOut' }}
+              />
+            </div>
+
+            <ol className="relative flex justify-between">
+              {BELTS.map((belt, i) => {
+                const earnedIndex = BELTS.findIndex(b => b.name === EARNED_BELT);
+                const earned = i <= earnedIndex;
+                const current = i === earnedIndex;
+                const goal = i === BELTS.length - 1;
+                return (
+                  <li key={belt.name} className="relative flex flex-col items-center">
+                    {current && (
+                      <motion.span
+                        className="absolute -top-8 whitespace-nowrap rounded-full bg-green-500 px-2 py-0.5 text-[10px] font-black text-white shadow sm:text-xs"
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 1.2, repeat: Infinity }}
+                      >
+                        I&apos;m here!
+                      </motion.span>
+                    )}
+                    {goal && (
+                      <motion.span
+                        className="absolute -top-8 whitespace-nowrap rounded-full bg-gray-900 px-2 py-0.5 text-[10px] font-black text-yellow-300 shadow sm:text-xs"
+                        animate={{ scale: [1, 1.1, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        Goal ⭐
+                      </motion.span>
+                    )}
+                    <motion.div
+                      className={`flex items-center justify-center rounded-xl bg-white p-0.5 ${
+                        current ? 'ring-4 ring-green-400' : goal ? 'ring-2 ring-dashed ring-gray-400' : ''
+                      } ${earned ? '' : 'opacity-40 grayscale-[60%]'}`}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ type: 'spring', delay: 0.2 + i * 0.08 }}
+                    >
+                      <BeltIcon color={belt.color} knot={belt.knot} />
+                    </motion.div>
+                    <span className={`mt-1 text-[10px] font-bold sm:text-xs ${earned ? 'text-blue-900' : 'text-blue-300'}`}>
+                      {belt.name}
+                      {earned && ' ✓'}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2 text-xs font-bold sm:text-sm">
+            <span className="rounded-full bg-green-100 px-3 py-1 text-green-700">🥋 {EARNED_BELT} belt: done!</span>
+            {NEXT_BELT && <span className="rounded-full bg-blue-100 px-3 py-1 text-blue-700">⏭️ Next up: {NEXT_BELT} belt</span>}
+            <span className="rounded-full bg-gray-900 px-3 py-1 text-yellow-300">🎯 Dream: Black belt</span>
+          </div>
+        </motion.div>
       </div>
     </SectionWrapper>
   );

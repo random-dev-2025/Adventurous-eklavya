@@ -50,6 +50,56 @@ const activities = [
     desc: 'Hitting sixes like a champ!',
   },
   {
+    title: 'Swimming',
+    icon: (
+      <svg viewBox="0 0 48 48" className="h-12 w-12 sm:h-14 sm:w-14">
+        {/* Swimmer doing freestyle */}
+        <circle cx="16" cy="22" r="5" fill="#3B82F6" />
+        <path d="M13 20 Q16 16 19 20" fill="#1D4ED8" />
+        <motion.g
+          animate={{ rotate: [0, -40, 0] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ originX: '22px', originY: '26px' }}
+        >
+          <line x1="22" y1="26" x2="34" y2="16" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" />
+        </motion.g>
+        {/* Waves */}
+        <motion.path
+          d="M2 30 Q8 26 14 30 T26 30 T38 30 T50 30"
+          fill="none" stroke="#38BDF8" strokeWidth="3" strokeLinecap="round"
+          animate={{ x: [-6, 0, -6] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.path
+          d="M2 38 Q8 34 14 38 T26 38 T38 38 T50 38"
+          fill="none" stroke="#7DD3FC" strokeWidth="3" strokeLinecap="round"
+          animate={{ x: [0, -6, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        {/* Bubbles */}
+        <motion.circle cx="38" cy="24" r="2" fill="#7DD3FC" animate={{ y: [0, -14], opacity: [1, 0] }} transition={{ duration: 1.6, repeat: Infinity }} />
+        <motion.circle cx="42" cy="26" r="1.5" fill="#BAE6FD" animate={{ y: [0, -12], opacity: [1, 0] }} transition={{ duration: 1.6, repeat: Infinity, delay: 0.6 }} />
+      </svg>
+    ),
+    color: 'from-cyan-400 to-sky-400',
+    desc: 'Splashing and racing in the pool!',
+  },
+  {
+    title: 'Karate',
+    icon: (
+      <svg viewBox="0 0 48 48" className="h-12 w-12 sm:h-14 sm:w-14">
+        {/* Green belt with knot */}
+        <motion.g animate={{ rotate: [-4, 4, -4] }} transition={{ duration: 2, repeat: Infinity }} style={{ originX: '24px', originY: '24px' }}>
+          <rect x="4" y="18" width="40" height="8" rx="2" fill="#16A34A" />
+          <rect x="19" y="15" width="10" height="14" rx="3" fill="#15803D" />
+          <path d="M21 28 L15 42 L20 42 L24 29 Z" fill="#16A34A" />
+          <path d="M27 28 L33 42 L28 42 L24 29 Z" fill="#16A34A" />
+        </motion.g>
+        <motion.text x="36" y="12" fontSize="10" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>🏆</motion.text>
+      </svg>
+    ),
+    color: 'from-emerald-400 to-green-500',
+    desc: 'Green belt now, black belt soon!',
+  },
+  {
     title: 'Dancing',
     icon: (
       <svg viewBox="0 0 48 48" className="h-12 w-12 sm:h-14 sm:w-14">

@@ -11,6 +11,18 @@ const funFacts = [
     border: 'border-blue-200',
   },
   {
+    emoji: '🏊',
+    fact: 'I am an amazing swimmer - I can zoom through the water like a fish!',
+    color: 'bg-cyan-50',
+    border: 'border-cyan-200',
+  },
+  {
+    emoji: '🥋',
+    fact: 'I have a green belt and a trophy in karate, and I am training hard for my black belt!',
+    color: 'bg-emerald-50',
+    border: 'border-emerald-200',
+  },
+  {
     emoji: '🎭',
     fact: 'I love performing and acting on stage!',
     color: 'bg-sky-50',
