@@ -10,7 +10,19 @@ type AvatarPose =
   | 'dancing'
   | 'skating'
   | 'acting'
-  | 'explorer';
+  | 'explorer'
+  | 'karate-ready'
+  | 'karate-punch'
+  | 'karate-kick'
+  | 'karate-chop'
+  | 'hello'
+  | 'sleeping';
+
+export type { AvatarPose };
+
+// Karate belt color - change this when Eklavya earns a new belt!
+const BELT_COLOR = '#F97316';
+const BELT_DARK = '#C2410C';
 
 interface AvatarProps {
   pose?: AvatarPose;
@@ -124,7 +136,88 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
         <stop offset="40%" stopColor="#1E293B" />
         <stop offset="100%" stopColor="#0F172A" />
       </linearGradient>
+      {/* Karate gi gradients */}
+      <linearGradient id="giGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="100%" stopColor="#E5E7EB" />
+      </linearGradient>
+      <linearGradient id="giSleeve" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="100%" stopColor="#E2E8F0" />
+      </linearGradient>
     </defs>
+  );
+
+  // ---- Karate pieces ----
+  const renderGiTop = () => (
+    <g>
+      <path d="M85 130 Q80 130 75 140 L70 175 Q70 180 80 180 L120 180 Q130 180 130 175 L125 140 Q120 130 115 130 Z" fill="url(#giGrad)" />
+      {/* Crossed lapels */}
+      <path d="M89 130 L106 172" fill="none" stroke="#CBD5E1" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M111 130 L99 156" fill="none" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" />
+      <path d="M89 130 Q100 134 111 130" fill="none" stroke="#CBD5E1" strokeWidth="2" />
+      {/* Belt with knot */}
+      <rect x="71" y="168" width="58" height="7" rx="2" fill={BELT_COLOR} />
+      <rect x="95" y="166" width="10" height="10" rx="2.5" fill={BELT_DARK} />
+      <path d="M97 175 L92 192 L97 192 L101 176 Z" fill={BELT_COLOR} />
+      <path d="M103 175 L109 191 L104 192 L100 176 Z" fill={BELT_COLOR} />
+    </g>
+  );
+
+  const renderGiPantsStance = () => (
+    <g>
+      <path d="M78 176 L68 211 Q68 215 74 215 L88 215 Q91 215 92 211 L100 190 L108 211 Q109 215 112 215 L126 215 Q132 215 132 211 L122 176 Z" fill="url(#giGrad)" />
+      <path d="M84 184 L78 210" fill="none" stroke="#E2E8F0" strokeWidth="1.5" />
+      <path d="M116 184 L122 210" fill="none" stroke="#E2E8F0" strokeWidth="1.5" />
+      {/* Bare feet */}
+      <ellipse cx="80" cy="219" rx="12" ry="5" fill="url(#skinGradArm)" />
+      <ellipse cx="120" cy="219" rx="12" ry="5" fill="url(#skinGradArm)" />
+    </g>
+  );
+
+  const renderFist = (cx: number, cy: number) => (
+    <g>
+      <circle cx={cx} cy={cy} r="7.5" fill="url(#skinGradArm)" />
+      <path d={`M${cx - 4} ${cy - 3} Q${cx} ${cy - 5} ${cx + 4} ${cy - 3}`} fill="none" stroke="#A0652F" strokeWidth="1" opacity="0.5" />
+    </g>
+  );
+
+  const renderSleeve = (d: string) => (
+    <path d={d} fill="none" stroke="url(#giSleeve)" strokeWidth="15" strokeLinecap="round" />
+  );
+
+  const renderImpact = (cx: number, cy: number, color = '#FBBF24') => (
+    <motion.g
+      initial={{ scale: 0.3, opacity: 0 }}
+      animate={{ scale: [0.3, 1.2, 1], opacity: [0, 1, 0.9] }}
+      transition={{ duration: 0.35 }}
+      style={{ originX: `${cx}px`, originY: `${cy}px` }}
+    >
+      <path
+        d={`M${cx} ${cy - 10} L${cx + 3} ${cy - 3} L${cx + 10} ${cy - 4} L${cx + 5} ${cy + 2} L${cx + 8} ${cy + 9} L${cx} ${cy + 5} L${cx - 7} ${cy + 9} L${cx - 5} ${cy + 2} L${cx - 10} ${cy - 4} L${cx - 3} ${cy - 3} Z`}
+        fill={color}
+        stroke="#F59E0B"
+        strokeWidth="1"
+      />
+    </motion.g>
+  );
+
+  const renderHeadband = () => (
+    <g>
+      <path d="M65 70 Q100 60 135 70 L135 76 Q100 66 65 76 Z" fill="#DC2626" />
+      <path d="M68 71 Q100 63 132 71" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+      <rect x="131" y="68" width="7" height="8" rx="2" fill="#B91C1C" />
+      <motion.path
+        fill="#DC2626"
+        animate={{ d: ['M137 71 Q148 66 158 70 L156 74 Q147 71 137 75 Z', 'M137 71 Q148 62 159 63 L158 67 Q147 67 137 75 Z', 'M137 71 Q148 66 158 70 L156 74 Q147 71 137 75 Z'] }}
+        transition={{ duration: 0.8, repeat: Infinity }}
+      />
+      <motion.path
+        fill="#EF4444"
+        animate={{ d: ['M137 73 Q147 76 155 82 L152 85 Q145 79 137 76 Z', 'M137 73 Q148 74 157 77 L155 81 Q146 78 137 76 Z', 'M137 73 Q147 76 155 82 L152 85 Q145 79 137 76 Z'] }}
+        transition={{ duration: 0.8, repeat: Infinity, delay: 0.2 }}
+      />
+    </g>
   );
 
   const renderSunglasses = () => {
@@ -448,6 +541,162 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
             />
           </g>
         );
+      case 'hello':
+        return (
+          <g filter="url(#softShadow)">
+            {renderGroundShadow()}
+            <path d="M85 130 Q80 130 75 140 L70 175 Q70 180 80 180 L120 180 Q130 180 130 175 L125 140 Q120 130 115 130 Z" fill="url(#hoodieGrad)" />
+            <path d="M85 130 Q90 126 100 128 Q110 126 115 130" fill="#7B8290" opacity="0.4" />
+            <rect x="85" y="158" width="30" height="12" rx="4" fill="#7B8290" opacity="0.4" />
+            <path d="M88 135 Q95 132 100 134" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="3" strokeLinecap="round" />
+            {/* Left arm relaxed */}
+            <path d="M75 140 Q65 155 68 165" fill="none" stroke="url(#hoodieSleeve)" strokeWidth="14" strokeLinecap="round" />
+            <circle cx="68" cy="167" r="7" fill="url(#skinGradArm)" />
+            {/* Right arm - waving hello! */}
+            <g>
+              <animateTransform attributeName="transform" type="rotate" values="-12 125 140;16 125 140;-12 125 140" dur="0.6s" repeatCount="indefinite" />
+              <path d="M125 140 Q142 124 146 106" fill="none" stroke="url(#hoodieSleeve)" strokeWidth="14" strokeLinecap="round" />
+              <circle cx="146" cy="101" r="7.5" fill="url(#skinGradArm)" />
+              <g stroke="#C68642" strokeWidth="2.6" strokeLinecap="round">
+                <line x1="141" y1="97" x2="139" y2="88" />
+                <line x1="145" y1="95" x2="144" y2="85" />
+                <line x1="149" y1="95" x2="150" y2="86" />
+                <line x1="152" y1="98" x2="155" y2="90" />
+                <line x1="140" y1="103" x2="135" y2="100" />
+              </g>
+            </g>
+            {/* Wave motion marks */}
+            <g stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" fill="none">
+              <animate attributeName="opacity" values="0.2;1;0.2" dur="0.6s" repeatCount="indefinite" />
+              <path d="M158 84 Q163 90 160 98" />
+              <path d="M134 80 Q129 86 131 94" />
+            </g>
+            <path d="M80 178 L78 210 Q78 215 85 215 L95 215 Q98 215 98 210 L100 190 L102 210 Q102 215 105 215 L115 215 Q122 215 122 210 L120 178 Z" fill="url(#pantsGrad)" />
+            <rect x="78" y="208" width="20" height="5" rx="2" fill="#4A453F" />
+            <rect x="102" y="208" width="20" height="5" rx="2" fill="#4A453F" />
+            {renderShoes()}
+          </g>
+        );
+      case 'sleeping':
+        return (
+          <g filter="url(#softShadow)">
+            {renderGroundShadow()}
+            <path d="M85 130 Q80 130 75 140 L70 175 Q70 180 80 180 L120 180 Q130 180 130 175 L125 140 Q120 130 115 130 Z" fill="url(#hoodieGrad)" />
+            <path d="M85 130 Q90 126 100 128 Q110 126 115 130" fill="#7B8290" opacity="0.4" />
+            <rect x="85" y="158" width="30" height="12" rx="4" fill="#7B8290" opacity="0.4" />
+            <path d="M88 135 Q95 132 100 134" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="3" strokeLinecap="round" />
+            {/* Hands resting together */}
+            <path d="M75 140 Q68 152 80 158" fill="none" stroke="url(#hoodieSleeve)" strokeWidth="14" strokeLinecap="round" />
+            <circle cx="82" cy="158" r="7" fill="url(#skinGradArm)" />
+            <path d="M125 140 Q132 152 120 158" fill="none" stroke="url(#hoodieSleeve)" strokeWidth="14" strokeLinecap="round" />
+            <circle cx="118" cy="158" r="7" fill="url(#skinGradArm)" />
+            <path d="M80 178 L78 210 Q78 215 85 215 L95 215 Q98 215 98 210 L100 190 L102 210 Q102 215 105 215 L115 215 Q122 215 122 210 L120 178 Z" fill="url(#pantsGrad)" />
+            <rect x="78" y="208" width="20" height="5" rx="2" fill="#4A453F" />
+            <rect x="102" y="208" width="20" height="5" rx="2" fill="#4A453F" />
+            {renderShoes()}
+            {/* Floating Zzz */}
+            {[
+              { x: 138, size: 12, delay: '0s' },
+              { x: 148, size: 16, delay: '0.8s' },
+              { x: 160, size: 20, delay: '1.6s' },
+            ].map(z => (
+              <text key={z.x} x={z.x} y="70" fontSize={z.size} fontWeight="900" fill="#93C5FD" opacity="0" fontFamily="sans-serif">
+                Z
+                <animate attributeName="y" values="78;46" dur="2.4s" begin={z.delay} repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin={z.delay} repeatCount="indefinite" />
+              </text>
+            ))}
+          </g>
+        );
+      case 'karate-ready':
+        return (
+          <g filter="url(#softShadow)">
+            {renderGroundShadow()}
+            {renderGiPantsStance()}
+            {renderGiTop()}
+            {/* Guard: both fists up */}
+            {renderSleeve('M75 140 Q64 156 84 151')}
+            {renderFist(86, 150)}
+            {renderSleeve('M125 140 Q138 152 118 146')}
+            {renderFist(116, 145)}
+          </g>
+        );
+      case 'karate-punch':
+        return (
+          <g filter="url(#softShadow)">
+            {renderGroundShadow()}
+            {renderGiPantsStance()}
+            {renderGiTop()}
+            {/* Left fist chambered at hip */}
+            {renderSleeve('M75 140 Q64 160 76 167')}
+            {renderFist(78, 167)}
+            {/* Right arm - straight punch! */}
+            {renderSleeve('M125 140 L164 136')}
+            {renderFist(167, 136)}
+            {/* Speed lines */}
+            <g stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" opacity="0.8">
+              <line x1="135" y1="126" x2="152" y2="125" />
+              <line x1="135" y1="147" x2="150" y2="146" />
+            </g>
+            {renderImpact(174, 128)}
+          </g>
+        );
+      case 'karate-kick':
+        return (
+          <g filter="url(#softShadow)">
+            {renderGroundShadow()}
+            {/* Standing leg */}
+            <path d="M78 176 L122 176 L118 192 L100 194 L96 211 Q95 215 90 215 L80 215 Q75 215 76 211 Z" fill="url(#giGrad)" />
+            <ellipse cx="86" cy="219" rx="12" ry="5" fill="url(#skinGradArm)" />
+            {/* Kicking leg - high side kick */}
+            <path d="M108 184 Q138 172 162 152" fill="none" stroke="url(#giGrad)" strokeWidth="20" strokeLinecap="round" />
+            <path d="M118 182 Q140 172 158 156" fill="none" stroke="#E2E8F0" strokeWidth="1.5" />
+            <ellipse cx="170" cy="146" rx="9" ry="5.5" fill="url(#skinGradArm)" transform="rotate(-40 170 146)" />
+            {renderGiTop()}
+            {/* Arms: one out for balance, one on guard */}
+            {renderSleeve('M75 140 Q58 132 48 124')}
+            {renderFist(46, 122)}
+            {renderSleeve('M125 140 Q138 150 120 146')}
+            {renderFist(118, 145)}
+            {/* Whoosh arc */}
+            <path d="M140 196 Q170 186 176 160" fill="none" stroke="#93C5FD" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="4 4" />
+            {renderImpact(175, 136)}
+          </g>
+        );
+      case 'karate-chop':
+        return (
+          <g filter="url(#softShadow)">
+            {renderGroundShadow()}
+            {/* Bricks */}
+            <rect x="138" y="198" width="12" height="22" rx="1.5" fill="#9CA3AF" />
+            <rect x="164" y="198" width="12" height="22" rx="1.5" fill="#9CA3AF" />
+            <line x1="138" y1="209" x2="150" y2="209" stroke="#6B7280" strokeWidth="1" />
+            <line x1="164" y1="209" x2="176" y2="209" stroke="#6B7280" strokeWidth="1" />
+            {/* Broken board - two halves */}
+            <g transform="rotate(20 139 196)">
+              <rect x="136" y="189" width="21" height="8" rx="1" fill="#D97706" stroke="#92400E" strokeWidth="0.8" />
+              <path d="M157 189 L153 193 L157 197" fill="none" stroke="#92400E" strokeWidth="1" />
+            </g>
+            <g transform="rotate(-20 175 196)">
+              <rect x="157" y="189" width="21" height="8" rx="1" fill="#F59E0B" stroke="#92400E" strokeWidth="0.8" />
+              <path d="M157 189 L161 193 L157 197" fill="none" stroke="#92400E" strokeWidth="1" />
+            </g>
+            {/* Splinters */}
+            <g stroke="#B45309" strokeWidth="1.5" strokeLinecap="round">
+              <line x1="155" y1="182" x2="151" y2="176" />
+              <line x1="160" y1="182" x2="165" y2="175" />
+            </g>
+            {renderGiPantsStance()}
+            {renderGiTop()}
+            {/* Left fist chambered */}
+            {renderSleeve('M75 140 Q64 160 76 167')}
+            {renderFist(78, 167)}
+            {/* Right arm - karate chop down! */}
+            {renderSleeve('M125 140 Q150 148 156 174')}
+            <ellipse cx="157" cy="181" rx="4.5" ry="8.5" fill="url(#skinGradArm)" />
+            {renderImpact(157, 188)}
+          </g>
+        );
       case 'explorer':
       default:
         return (
@@ -471,8 +720,10 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
   };
 
   const renderHead = () => {
-    const mouthOpen = pose === 'singing';
-    const isHappy = ['dancing', 'waving', 'skating'].includes(pose);
+    const isKarateAttack = ['karate-punch', 'karate-kick', 'karate-chop'].includes(pose);
+    const mouthOpen = pose === 'singing' || isKarateAttack;
+    const isAsleep = pose === 'sleeping';
+    const isHappy = ['dancing', 'waving', 'skating', 'karate-ready'].includes(pose);
 
     return (
       <g filter="url(#headShadow)">
@@ -535,8 +786,17 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
         <path d="M77 81 L87 77 L93 80" fill="none" stroke="#0F0F1E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M107 80 L113 77 L123 81" fill="none" stroke="#0F0F1E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
 
-        {/* Sunglasses - always on, anime style */}
-        {renderSunglasses()}
+        {/* Sunglasses - always on, anime style (pushed up onto his hair while he naps) */}
+        {isAsleep ? (
+          <g>
+            <g transform="translate(0 -20)">{renderSunglasses()}</g>
+            {/* Closed sleepy eyes */}
+            <path d="M79 92 Q85 97 91 92" fill="none" stroke="#0F0F1E" strokeWidth="2.2" strokeLinecap="round" />
+            <path d="M109 92 Q115 97 121 92" fill="none" stroke="#0F0F1E" strokeWidth="2.2" strokeLinecap="round" />
+          </g>
+        ) : (
+          renderSunglasses()
+        )}
 
         {/* Cheeks - subtle */}
         <ellipse cx="78" cy="102" rx="6" ry="4" fill="url(#cheekGlow)" />
@@ -547,7 +807,11 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
         <ellipse cx="100" cy="100" rx="1" ry="0.6" fill="rgba(255,255,255,0.12)" />
 
         {/* Mouth */}
-        {mouthOpen ? (
+        {isAsleep ? (
+          <ellipse cx="100" cy="109" rx="3" ry="2.5" fill="url(#lipGrad)">
+            <animate attributeName="ry" values="2;3.2;2" dur="2.4s" repeatCount="indefinite" />
+          </ellipse>
+        ) : mouthOpen ? (
           <g>
             <path d="M92 106 Q100 114 108 106" fill="url(#lipGrad)" />
             <path d="M94 106 Q100 108 106 106" fill="white" opacity="0.8" />
@@ -566,6 +830,9 @@ export default function Avatar({ pose = 'waving', size = 200, className = '' }: 
 
         {/* Sharp chin line */}
         <path d="M88 118 Q100 126 112 118" fill="none" stroke="#A0652F" strokeWidth="0.6" opacity="0.12" />
+
+        {/* Karate headband */}
+        {pose.startsWith('karate') && renderHeadband()}
 
         {/* Skating helmet overlay */}
         {pose === 'skating' && (

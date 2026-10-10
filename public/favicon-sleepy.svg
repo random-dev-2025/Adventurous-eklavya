@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E3A8A"/><stop offset="1" stop-color="#312E81"/></linearGradient></defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <!-- Face -->
+  <circle cx="32" cy="38" r="20" fill="#C68642"/>
+  <!-- Spiky hair -->
+  <path d="M12 36 Q10 16 30 13 L27 6 L36 12 L40 4 L43 13 L52 9 L49 17 Q55 24 52 36 Q48 24 32 22 Q16 24 12 36 Z" fill="#0F0F1E"/>
+  <!-- Red karate headband -->
+  <path d="M12.5 27 Q32 20 51.5 27 L51.5 31 Q32 24 12.5 31 Z" fill="#EF4444"/>
+  <path d="M50 28 Q57 25 61 28 L59 31 Q55 29 50 31 Z" fill="#EF4444"/>
+  <path d="M50 30 Q56 32 59 37 L56 38 Q53 34 50 32 Z" fill="#DC2626"/>
+  <!-- Sleepy eyes -->
+  <path d="M18 38 Q22.5 42 27 38" fill="none" stroke="#0F172A" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M37 38 Q41.5 42 46 38" fill="none" stroke="#0F172A" stroke-width="2.6" stroke-linecap="round"/>
+  <ellipse cx="32" cy="49" rx="2.6" ry="2.2" fill="#7F1D1D"/>
+  <text x="45" y="20" font-family="Arial, sans-serif" font-size="15" font-weight="900" fill="#BFDBFE">Z</text>
+  <text x="54" y="11" font-family="Arial, sans-serif" font-size="10" font-weight="900" fill="#BFDBFE">z</text>
+</svg>

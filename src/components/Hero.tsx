@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Avatar from './Avatar';
+import ReactiveAvatar from './ReactiveAvatar';
 import {
   FloatingElement,
   Star,
@@ -168,12 +168,8 @@ export default function Hero() {
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          <motion.div
-            animate={{ y: [-5, 5, -5] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <Avatar pose="waving" size={220} className="relative z-10 h-[180px] w-[180px] drop-shadow-2xl sm:h-[220px] sm:w-[220px] md:h-[260px] md:w-[260px]" />
-          </motion.div>
+          {/* Reacts: waves when you come back to the top, dances when clicked, naps when left alone */}
+          <ReactiveAvatar className="relative z-10 h-[180px] w-[180px] drop-shadow-2xl sm:h-[220px] sm:w-[220px] md:h-[260px] md:w-[260px]" />
         </motion.div>
 
         {/* Title */}

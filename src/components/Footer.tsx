@@ -142,7 +142,7 @@ export default function Footer() {
             transition={{ delay: 0.4 }}
           >
             <div className="text-center">
-              <div className="text-2xl font-black text-blue-600">6</div>
+              <div className="text-2xl font-black text-blue-600">7</div>
               <div className="text-xs font-semibold text-blue-300">Countries</div>
             </div>
             <div className="h-8 w-px bg-blue-100" />

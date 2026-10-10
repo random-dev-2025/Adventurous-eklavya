@@ -5,13 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import WhoAmI from '@/components/WhoAmI';
+import BirthdayCountdown from '@/components/BirthdayCountdown';
+import TabFun from '@/components/TabFun';
+import CursorPlane from '@/components/CursorPlane';
 import WhatILove from '@/components/WhatILove';
 import Superpowers from '@/components/Superpowers';
 import VisitorBadges from '@/components/VisitorBadges';
 import WorldMap from '@/components/WorldMap';
 import Countries from '@/components/Countries';
 import AdventurePoll from '@/components/AdventurePoll';
-import CricketGame from '@/components/CricketGame';
+import KarateShow from '@/components/KarateShow';
 import Gallery from '@/components/Gallery';
 import FunFacts from '@/components/FunFacts';
 import Footer from '@/components/Footer';
@@ -55,17 +58,20 @@ export default function Home() {
     <>
       <LoadingScreen />
       <BirthdayMode />
+      <TabFun />
+      <CursorPlane />
       <Navigation />
       <main>
         <Hero />
         <WhoAmI />
+        <BirthdayCountdown />
         <WhatILove />
         <Superpowers />
         <VisitorBadges />
         <WorldMap />
         <Countries />
         <AdventurePoll />
-        <CricketGame />
+        <KarateShow />
         <Gallery />
         <FunFacts />
       </main>

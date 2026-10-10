@@ -91,9 +91,21 @@ const COUNTRIES: CountryData[] = [
     icon: '\u{1F30D}',
     cities: ['Prague'],
   },
+  {
+    name: 'Hong Kong',
+    code: 'HK',
+    flag: '\u{1F1ED}\u{1F1F0}',
+    stamp: 'HKG',
+    fact: 'Skyscrapers & Victoria Peak!',
+    color: '#EC4899',
+    gradientFrom: 'from-pink-400',
+    gradientTo: 'to-fuchsia-500',
+    icon: '\u{1F303}',
+    cities: ['Hong Kong'],
+  },
 ];
 
-const TRAVEL_SEQUENCE = ['TH', 'MY', 'SG', 'AT', 'DE', 'CZ'];
+const TRAVEL_SEQUENCE = ['TH', 'MY', 'SG', 'AT', 'DE', 'CZ', 'HK'];
 
 // Passport-style travel card component
 function TravelCard({
@@ -387,7 +399,7 @@ export default function WorldMap() {
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              Journey Complete! 6 countries explored!
+              Journey Complete! {TRAVEL_SEQUENCE.length} countries explored!
             </motion.p>
             <motion.button
               onClick={handleReplay}

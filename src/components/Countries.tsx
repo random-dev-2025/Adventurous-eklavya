@@ -11,6 +11,7 @@ const countries = [
   { name: 'Czech Republic', flag: '🇨🇿', stamp: 'PRG', color: 'border-cyan-300' },
   { name: 'Malaysia', flag: '🇲🇾', stamp: 'KUL', color: 'border-blue-300' },
   { name: 'Singapore', flag: '🇸🇬', stamp: 'SIN', color: 'border-sky-400' },
+  { name: 'Hong Kong', flag: '🇭🇰', stamp: 'HKG', color: 'border-cyan-400' },
 ];
 
 function PassportStamp({ country, index }: { country: typeof countries[0]; index: number }) {

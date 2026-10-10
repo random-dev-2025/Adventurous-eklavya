@@ -10,3 +10,13 @@ export function isBirthdayMode(): boolean {
   const now = new Date();
   return now.getMonth() === BIRTHDAY_MONTH && now.getDate() === BIRTHDAY_DAY;
 }
+
+export const BIRTH_YEAR = 2018;
+
+// Midnight at the start of Eklavya's next birthday (today's, if it is his birthday)
+export function getNextBirthday(now: Date = new Date()): Date {
+  const thisYear = new Date(now.getFullYear(), BIRTHDAY_MONTH, BIRTHDAY_DAY);
+  const endOfThisYears = new Date(now.getFullYear(), BIRTHDAY_MONTH, BIRTHDAY_DAY + 1);
+  if (now < endOfThisYears) return thisYear;
+  return new Date(now.getFullYear() + 1, BIRTHDAY_MONTH, BIRTHDAY_DAY);
+}

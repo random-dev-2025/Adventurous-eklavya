@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22D3EE"/><stop offset="0.5" stop-color="#3B82F6"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <!-- Face -->
+  <circle cx="32" cy="38" r="20" fill="#C68642"/>
+  <!-- Spiky hair -->
+  <path d="M12 36 Q10 16 30 13 L27 6 L36 12 L40 4 L43 13 L52 9 L49 17 Q55 24 52 36 Q48 24 32 22 Q16 24 12 36 Z" fill="#0F0F1E"/>
+  <!-- Red karate headband -->
+  <path d="M12.5 27 Q32 20 51.5 27 L51.5 31 Q32 24 12.5 31 Z" fill="#EF4444"/>
+  <path d="M50 28 Q57 25 61 28 L59 31 Q55 29 50 31 Z" fill="#EF4444"/>
+  <path d="M50 30 Q56 32 59 37 L56 38 Q53 34 50 32 Z" fill="#DC2626"/>
+  <!-- Cool shades -->
+  <path d="M15 32 L29 32 L28 41 L17 41 Z" fill="#0F172A"/>
+  <path d="M35 32 L49 32 L47 41 L36 41 Z" fill="#0F172A"/>
+  <path d="M29 34 Q32 36 35 34" fill="none" stroke="#0F172A" stroke-width="2.4"/>
+  <path d="M18 34 L23 34 L22 36 Z" fill="#fff" opacity="0.7"/>
+  <path d="M38 34 L43 34 L42 36 Z" fill="#fff" opacity="0.7"/>
+  <!-- Big grin -->
+  <path d="M23 47 Q32 56 41 47 Z" fill="#7F1D1D"/>
+  <path d="M25 47.5 Q32 50 39 47.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Sparkles -->
+  <path d="M55 6 L57 11 L62 13 L57 15 L55 20 L53 15 L48 13 L53 11 Z" fill="#FDE047"/>
+  <circle cx="8" cy="54" r="2.5" fill="#FDE047"/>
+</svg>

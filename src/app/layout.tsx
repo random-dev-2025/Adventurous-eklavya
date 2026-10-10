@@ -13,9 +13,6 @@ export const metadata: Metadata = {
   description:
     "Welcome to Eklavya's adventure world! A 7-year-old explorer who loves traveling, cricket, skating, dancing, singing, and acting.",
   keywords: ["Eklavya", "adventure", "kids", "explorer", "travel"],
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export default function RootLayout({

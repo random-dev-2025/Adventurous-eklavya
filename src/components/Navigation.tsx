@@ -6,10 +6,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#who-am-i' },
+  { label: 'Birthday', href: '#countdown' },
   { label: 'Interests', href: '#what-i-love' },
   { label: 'Superpowers', href: '#superpowers' },
   { label: 'Travels', href: '#travel-map' },
-  { label: 'Cricket', href: '#cricket-game' },
+  { label: 'Karate', href: '#karate' },
   { label: 'Gallery', href: '#gallery' },
 ];
 
